@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#222221">
+<meta name="robots" content="noindex, nofollow">
+<title>Relevé chantier — Les Ateliers Michel</title>
+<style>
+:root{
+  --ink:#222221; --or:#F27C00; --or-d:#C96600; --or-soft:#FDEEDD; --line:#E3E1DC; --mut:#6B6B6B;
+  --bg:#F4F4F2; --card:#fff; --ok:#1A7F37; --err:#C62828; --warn:#9A5B00; --r:12px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+button,input,select,textarea{font:inherit;color:inherit}
+.hd{position:sticky;top:0;z-index:20;background:var(--ink);color:#fff;border-bottom:3px solid var(--or);padding:calc(10px + env(safe-area-inset-top)) 16px 10px}
+.brand{display:flex;align-items:center;gap:12px;max-width:720px;margin:0 auto}
+.logo{width:40px;height:40px;border-radius:8px;background:var(--or);display:grid;place-items:center;font-weight:800;letter-spacing:.5px}
+.brand b{display:block;font-size:15px;letter-spacing:.6px;text-transform:uppercase}
+.brand span{font-size:13px;color:#CFCFCF}
+main{max-width:720px;margin:0 auto;padding:14px 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 14px 6px;margin-bottom:14px}
+.card h2{display:flex;align-items:center;gap:10px;font-size:17px;margin:0 0 4px}
+.card .sub{margin:0 0 14px 38px;color:var(--mut);font-size:13px}
+.n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--or-soft);color:var(--or-d);display:grid;place-items:center;font-size:14px;font-weight:800}
+.f{margin-bottom:16px}
+.f>label,.lbl{display:block;font-weight:650;font-size:14px;margin-bottom:6px}
+.f>label em,.lbl em{color:var(--or-d);font-style:normal}
+.f i{font-style:normal;font-weight:400;color:var(--mut)}
+.hint{margin:6px 0 0;font-size:12.5px;color:var(--mut)}
+input[type=text],input[type=tel],input[type=email],input[type=number],select,textarea{
+  width:100%;min-height:48px;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:11px 12px;outline:none;-webkit-appearance:none;appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--mut) 50%),linear-gradient(135deg,var(--mut) 50%,transparent 50%);background-position:calc(100% - 18px) 21px,calc(100% - 13px) 21px;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--or)}
+[aria-invalid=true]{border-color:var(--err)!important}
+.err{display:none;margin:6px 0 0;color:var(--err);font-size:13px;font-weight:600}
+.has-err>.err,.has-err .err.on{display:block}
+.warn{margin:6px 0 0;color:var(--warn);font-size:13px}
+.g2{display:grid;gap:0 12px}
+@media(min-width:560px){.g2{grid-template-columns:1fr 1fr}}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.chips.sm{grid-template-columns:repeat(3,1fr)}
+@media(min-width:560px){.chips.sm{grid-template-columns:repeat(6,1fr)}}
+.chips.seg{grid-template-columns:repeat(4,1fr)}
+.chips.seg2{grid-template-columns:repeat(2,1fr)}
+.chips.seg2 .chip{justify-content:center}
+.chip{position:relative;display:flex;align-items:center;gap:10px;min-height:50px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:border-color .12s,background .12s}
+.chips.sm .chip,.chips.seg .chip{justify-content:center;text-align:center;padding:10px 6px}
+.chip input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.chip .cl{display:flex;flex-direction:column;line-height:1.25}
+.chip b{font-size:14.5px;font-weight:650}
+.chip small{font-size:12px;color:var(--mut)}
+.chip .ic{font-size:18px}
+.chip .sw{flex:none;width:26px;height:26px;border-radius:6px;border:1px solid rgba(0,0,0,.18)}
+.chip.on{border-color:var(--or);background:var(--or-soft)}
+.chip.on b{color:var(--ink)}
+.chip.on::after{content:"✓";position:absolute;top:4px;right:8px;font-size:12px;font-weight:800;color:var(--or-d)}
+.chip:focus-within{outline:3px solid rgba(242,124,0,.35);outline-offset:1px}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;padding:12px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer}
+.switch b{font-size:14.5px}.switch small{display:block;font-size:12px;color:var(--mut)}
+.switch input{position:absolute;opacity:0;width:1px;height:1px}
+.tg{flex:none;width:50px;height:30px;border-radius:15px;background:#CFCDC7;position:relative;transition:background .15s}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .15s}
+.switch input:checked+.tg{background:var(--or)}
+.switch input:checked+.tg::after{transform:translateX(20px)}
+.switch:focus-within{outline:3px solid rgba(242,124,0,.35)}
+.ouv{border:1.5px solid var(--line);border-radius:10px;padding:12px 12px 2px;margin-bottom:10px;background:#FBFBFA}
+.ouv-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ouv-h b{font-size:14px;color:var(--or-d);text-transform:uppercase;letter-spacing:.5px}
+.ouv .f{margin-bottom:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 74px;gap:8px}
+.x{border:0;background:none;width:40px;height:40px;border-radius:8px;color:var(--mut);font-size:18px;cursor:pointer}
+.x:hover{background:#EEE}
+.btn2{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 16px;border-radius:10px;border:1.5px dashed var(--or);background:#fff;color:var(--or-d);font-weight:700;cursor:pointer;width:100%}
+.btn2[disabled]{opacity:.45;cursor:not-allowed}
+.box{border:1.5px solid var(--line);border-radius:10px;padding:12px;margin-bottom:16px}
+.box-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:650;font-size:14px}
+.rec{width:100%;min-height:52px;border:0;border-radius:10px;background:var(--ink);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer}
+.rec .dot{width:12px;height:12px;border-radius:50%;background:#E53935}
+.rec.on{background:#B71C1C}.rec.on .dot{background:#fff;animation:p 1s infinite}
+@keyframes p{50%{opacity:.25}}
+.rec[disabled]{opacity:.5;cursor:not-allowed}
+.audio{display:flex;align-items:center;gap:8px;margin-top:10px}
+.audio audio{flex:1;min-width:0;height:40px}
+.timer{font-variant-numeric:tabular-nums;color:var(--mut)}
+.ph-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.ph{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;background:#EEE;border:1px solid var(--line)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .x{position:absolute;top:4px;right:4px;width:30px;height:30px;background:rgba(0,0,0,.6);color:#fff;font-size:14px}
+.ph.empty{display:grid;place-items:center;color:#AAA;font-size:12px;border-style:dashed}
+.file-in{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+.bar-in{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:6px}
+.sum{font-size:12.5px;color:var(--mut);text-align:center}
+.send{width:100%;min-height:54px;border:0;border-radius:12px;background:var(--or);color:#fff;font-weight:800;font-size:16.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px}
+.send:active{background:var(--or-d)}
+.send[disabled]{opacity:.7;cursor:progress}
+.spin{width:18px;height:18px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:s .8s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+#toast{position:fixed;left:50%;bottom:calc(110px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;z-index:50;max-width:calc(100% - 24px);background:var(--ink);color:#fff;padding:12px 16px;border-radius:10px;font-size:14px;transition:.2s}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.bad{background:var(--err)}
+.done{position:fixed;inset:0;z-index:60;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px}
+.done[hidden]{display:none}
+.done-c{background:#fff;border:1px solid var(--line);border-top:4px solid var(--ok);border-radius:var(--r);padding:26px 20px;max-width:440px;width:100%;text-align:center}
+.done-c .ck{width:56px;height:56px;border-radius:50%;background:#E6F4EA;color:var(--ok);display:grid;place-items:center;font-size:28px;margin:0 auto 12px}
+.done-c h2{margin:0 0 6px}
+.done-c .id{display:inline-block;margin:8px 0;padding:6px 12px;border-radius:8px;background:var(--or-soft);color:var(--or-d);font-weight:800;letter-spacing:.5px}
+.done-c p{color:var(--mut);margin:6px 0}
+.done-c .send{margin-top:16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">AM</div>
+    <div><b>Les Ateliers Michel</b><span>Relevé chantier &amp; pré-devis</span></div>
+  </div>
+</header>
+
+<main>
+<form id="f" novalidate autocomplete="on">
+
+  <!-- ========== BLOC 1 ========== -->
+  <section class="card" aria-labelledby="t1">
+    <h2 id="t1"><span class="n">1</span>Identification &amp; chantier</h2>
+    <p class="sub">Coordonnées du client et contraintes d'accès</p>
+
+    <div class="g2">
+      <div class="f" data-field>
+        <label for="nom">Nom <em>*</em></label>
+        <input type="text" id="nom" name="nom" autocomplete="family-name" autocapitalize="characters" placeholder="Ex : DUPONT">
+        <p class="err"></p>
+      </div>
+      <div class="f" data-field>
+        <label for="prenom">Prénom <em>*</em></label>
+        <input type="text" id="prenom" name="prenom" autocomplete="given-name" autocapitalize="words" placeholder="Ex : Jean-Marc">
+        <p class="err"></p>
+      </div>
+      <div class="f" data-field>
+        <label for="telephone">Téléphone <em>*</em></label>
+        <input type="tel" id="telephone" name="telephone" autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78">
+        <p class="err"></p>
+      </div>
+      <div class="f" data-field>
+        <label for="email">Email <em>*</em></label>
+        <input type="email" id="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" placeholder="client@exemple.fr">
+        <p class="err"></p>
+      </div>
+    </div>
+
+    <div class="f" data-field>
+      <label for="adresse">Adresse complète du chantier <em>*</em></label>
+      <input type="text" id="adresse" name="adresse" autocomplete="street-address" placeholder="Ex : 14 rue Saint-Aubin, 49100 Angers">
+      <p class="hint">Numéro, rue, code postal et ville : sert au calcul du trajet depuis Le Lion-d'Angers.</p>
+      <p class="err"></p>
+    </div>
+
+    <div class="f" data-field>
+      <span class="lbl" id="l-bat">Type de bâtiment <em>*</em></span>
+      <div class="chips" data-name="type_batiment" data-required role="radiogroup" aria-labelledby="l-bat"></div>
+      <p class="err"></p>
+    </div>
+
+    <div class="f" data-field>
+      <span class="lbl" id="l-log">Logement achevé depuis plus de 2 ans ? <em>*</em></span>
+      <div class="chips seg2" data-name="logement" data-required role="radiogroup" aria-labelledby="l-log"></div>
+      <p class="hint">Détermine le taux de TVA : 5,5 % ou 10 % si plus de 2 ans, 20 % sinon.</p>
+      <p class="err"></p>
+    </div>
+
+    <div class="f" data-field>
+      <span class="lbl" id="l-etage">Étage d'intervention <em>*</em></span>
+      <div class="chips sm" data-name="etage" data-default="RDC" data-required role="radiogroup" aria-labelledby="l-etage"></div>
+      <label class="switch" for="sans_ascenseur">
+        <span><b>Sans ascenseur</b><small>Majoration d'accès appliquée selon l'étage</small></span>
+        <input type="checkbox" id="sans_ascenseur" name="sans_ascenseur">
+        <span class="tg" aria-hidden="true"></span>
+      </label>
+      <p class="err"></p>
+    </div>
+  </section>
+
+  <!-- ========== BLOC 2 ========== -->
+  <section class="card" aria-labelledby="t2">
+    <h2 id="t2"><span class="n">2</span>Produits &amp; QCM technique</h2>
+    <p class="sub">Choix guidés pour éviter les erreurs de couleur et de vitrage</p>
+
+    <div class="f" data-field>
+      <span class="lbl" id="l-four">Préférence fournisseur <em>*</em></span>
+      <div class="chips" data-name="fournisseur" data-required role="radiogroup" aria-labelledby="l-four"></div>
+      <p class="err"></p>
+    </div>
+
+    <div class="f" data-field>
+      <span class="lbl" id="l-int">Type d'intervention <em>*</em></span>
+      <div class="chips" data-name="type_intervention" data-required role="radiogroup" aria-labelledby="l-int"></div>
+      <p class="err"></p>
+    </div>
+
+    <div class="f">
+      <span class="lbl">Ouvrages &amp; dimensions <em>*</em> <i>(cotes en millimètres)</i></span>
+      <div id="ouvrages"></div>
+      <button type="button" class="btn2" id="add-ouv">+ Ajouter un ouvrage</button>
+    </div>
+
+    <div class="f" data-field>
+      <span class="lbl" id="l-coul">Couleur / RAL <em>*</em></span>
+      <div class="chips" data-name="couleur" data-required role="radiogroup" aria-labelledby="l-coul"></div>
+      <p class="err"></p>
+    </div>
+    <div class="f" data-field id="c-bico" hidden>
+      <label for="couleur_ext">Couleur extérieure (code RAL) <em>*</em></label>
+      <input type="text" id="couleur_ext" name="couleur_ext" autocapitalize="characters" placeholder="Ex : RAL 7016">
+      <p class="hint">Intérieur blanc, extérieur dans le code saisi.</p>
+      <p class="err"></p>
+    </div>
+    <div class="f" data-field id="c-autre" hidden>
+      <label for="couleur_code">Code RAL ou référence fournisseur <em>*</em></label>
+      <input type="text" id="couleur_code" name="couleur_code" autocapitalize="characters" placeholder="Ex : RAL 7035 ou K-Line Gris Sablé 2900">
+      <p class="err"></p>
+    </div>
+
+    <div class="f" data-field>
+      <span class="lbl" id="l-vit">Vitrage <em>*</em></span>
+      <div class="chips" data-name="vitrage" data-required role="radiogroup" aria-labelledby="l-vit"></div>
+      <p class="err"></p>
+    </div>
+
+    <div class="f" data-field>
+      <span class="lbl" id="l-fin">Finition &amp; quincaillerie <i>(plusieurs choix possibles)</i></span>
+      <div class="chips" data-name="finition" data-multi data-exclusive="Standard" data-default="Standard" role="group" aria-labelledby="l-fin"></div>
+      <p class="err"></p>
+    </div>
+  </section>
+
+  <!-- ========== BLOC 3 ========== -->
+  <section class="card" aria-labelledby="t3">
+    <h2 id="t3"><span class="n">3</span>Logistique &amp; main-d'œuvre</h2>
+    <p class="sub">Équipe, temps estimé et moyens d'accès</p>
+
+    <div class="f" data-field>
+      <span class="lbl" id="l-pos">Nombre de poseurs prévus <em>*</em></span>
+      <div class="chips seg" data-name="nb_poseurs" data-default="2" data-required role="radiogroup" aria-labelledby="l-pos"></div>
+      <p class="err"></p>
+    </div>
+
+    <div class="f" data-field>
+      <label for="heures_mo">Temps de main-d'œuvre estimé <i>(heures, pose + dépose)</i></label>
+      <input type="number" id="heures_mo" name="heures_mo" inputmode="decimal" min="0" max="500" step="0.5" placeholder="Ex : 7">
+      <p class="hint">Total pour toute l'équipe. Laisser vide si vous voulez que l'agent l'estime.</p>
+      <p class="err"></p>
+    </div>
+
+    <div class="f" data-field>
+      <span class="lbl" id="l-man">Manutention / accès <i>(plusieurs choix possibles)</i></span>
+      <div class="chips" data-name="manutention" data-multi data-exclusive="Aucun" data-default="Aucun" role="group" aria-labelledby="l-man"></div>
+      <p class="err"></p>
+    </div>
+  </section>
+
+  <!-- ========== BLOC 4 ========== -->
+  <section class="card" aria-labelledby="t4">
+    <h2 id="t4"><span class="n">4</span>Terrain &amp; pièces jointes</h2>
+    <p class="sub">Notes, mémo vocal et photos du chantier</p>
+
+    <div class="f" data-field>
+      <label for="notes">Notes complémentaires</label>
+      <textarea id="notes" name="notes" placeholder="Contraintes particulières : pierre de tuffeau, coffre de volet existant, hauteur d'allège à recontrôler…"></textarea>
+      <p class="err"></p>
+    </div>
+
+    <div class="box">
+      <div class="box-h"><span>🎙️ Mémo vocal</span><span class="timer" id="timer">00:00</span></div>
+      <button type="button" class="rec" id="rec"><span class="dot"></span><span id="rec-t">Enregistrer un mémo vocal</span></button>
+      <div class="audio" id="audio-wrap" hidden>
+        <audio id="audio" controls preload="metadata"></audio>
+        <button type="button" class="x" id="audio-del" aria-label="Supprimer le mémo vocal">✕</button>
+      </div>
+      <p class="hint" id="rec-hint">5 minutes maximum.</p>
+    </div>
+
+    <div class="box">
+      <div class="box-h"><span>📷 Photos &amp; croquis de cotes</span><span id="ph-count">0 / 3</span></div>
+      <div class="ph-btns">
+        <button type="button" class="btn2" id="ph-cam">📷 Prendre une photo</button>
+        <button type="button" class="btn2" id="ph-lib">🖼️ Galerie</button>
+      </div>
+      <input class="file-in" type="file" id="in-cam" accept="image/*" capture="environment" tabindex="-1" aria-hidden="true">
+      <input class="file-in" type="file" id="in-lib" accept="image/*" multiple tabindex="-1" aria-hidden="true">
+      <div class="ph-grid" id="ph-grid"></div>
+    </div>
+  </section>
+
+  <div class="bar">
+    <div class="bar-in">
+      <div class="sum" id="sum" aria-live="polite"></div>
+      <button type="submit" class="send" id="send"><span id="send-t">Envoyer le relevé</span></button>
+    </div>
+  </div>
+</form>
+</main>
+
+<div class="done" id="done" hidden role="dialog" aria-modal="true" aria-labelledby="done-t">
+  <div class="done-c">
+    <div class="ck" aria-hidden="true">✓</div>
+    <h2 id="done-t">Relevé envoyé</h2>
+    <div class="id" id="done-id"></div>
+    <p id="done-msg"></p>
+    <p id="done-time"></p>
+    <button type="button" class="send" id="again">Nouveau relevé</button>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     CONFIGURATION — à adapter
+     ========================================================= */
+  var CONFIG = {
+    // URL de production du nœud Webhook (POST). Pour tester avant publication :
+    // https://devisconformite.app.n8n.cloud/webhook-test/fiche-prodevis-b2c
+    WEBHOOK_URL: 'https://devisconformite.app.n8n.cloud/webhook-test/fiche-prodevis-b2c',
+    MAX_PHOTOS: 3,
+    PHOTO_MAX_PX: 1600,      // côté le plus long après compression
+    PHOTO_QUALITY: 0.8,      // qualité JPEG
+    AUDIO_MAX_SEC: 300,      // 5 min
+    TIMEOUT_MS: 90000,       // envoi en 4G : on laisse le temps
+    SOURCE: 'webapp-releve-chantier-v1'
+  };
+
+  var OPTIONS = {
+    type_batiment: [
+      { v: 'Maison', i: '🏠' }, { v: 'Appartement', i: '🏢' }, { v: 'Entreprise', i: '🏭' },
+      { v: 'Immeuble', i: '🏙️' }, { v: 'Marché Public / Armée', i: '🛡️' }
+    ],
+    logement: [{ v: 'oui', l: 'Oui', s: 'Plus de 2 ans' }, { v: 'non', l: 'Non', s: 'Neuf ou moins de 2 ans' }],
+    etage: ['RDC', '1er', '2e', '3e', '4e+', 'Sous-sol'],
+    fournisseur: ['K-Line', 'Solabaie', 'Deceuninck', 'Bubendorff', 'Fabrication Atelier Chêne', 'Mixte / À arbitrer'],
+    type_intervention: ['Pose en rénovation', 'Dépose totale', 'Pose en neuf', 'Agencement sur mesure'],
+    couleur: [
+      { v: 'RAL 7016', l: 'RAL 7016', s: 'Gris Anthracite', c: '#383E42' },
+      { v: 'RAL 9016', l: 'RAL 9016', s: 'Blanc', c: '#F1F0EA' },
+      { v: 'RAL 9005', l: 'RAL 9005', s: 'Noir Sablé', c: '#0E0E10' },
+      { v: 'Chêne Doré / Naturel', l: 'Chêne', s: 'Doré / Naturel', c: 'linear-gradient(135deg,#C8955A,#8A5A2B)' },
+      { v: 'Bicolore', l: 'Bicolore', s: 'Blanc int. / Couleur ext.', c: 'linear-gradient(135deg,#F1F0EA 50%,#383E42 50%)' },
+      { v: 'Autre code RAL', l: 'Autre', s: 'Code RAL à saisir', c: 'conic-gradient(#E53935,#FDD835,#43A047,#1E88E5,#8E24AA,#E53935)' }
+    ],
+    vitrage: [
+      { v: 'Double vitrage thermique standard (Uw ≤ 1,3)', l: 'Double vitrage thermique', s: 'Standard · Uw ≤ 1,3' },
+      { v: 'Triple vitrage', l: 'Triple vitrage' },
+      { v: 'Vitrage acoustique renforcé', l: 'Acoustique renforcé' },
+      { v: "Vitrage retardateur d'effraction SP10", l: 'Retardateur effraction', s: 'SP10' },
+      { v: 'Vitrage dépoli / granité', l: 'Dépoli / granité' }
+    ],
+    finition: ['Standard', 'Poignée Secustik', 'Seuil PMR encastré', 'Volet roulant intégré', 'Petits bois incorporés'],
+    nb_poseurs: ['1', '2', '3', '4'],
+    manutention: [
+      { v: 'Aucun' }, { v: 'Échafaudage' }, { v: 'Nacelle' }, { v: 'Robot ventouse' },
+      { v: 'Location grue hors charge - 1400 €', l: 'Grue hors charge', s: 'Location 1 400 €' }
+    ]
+  };
+
+  var OUVRAGES = [
+    'Fenêtre', 'Porte-fenêtre', 'Baie coulissante', "Porte d'entrée", 'Porte de service / garage',
+    'Volet roulant', 'Volet battant', 'Fenêtre de toit', 'Châssis fixe', 'Agencement / placard',
+    'Habillage / bardage', 'Autre'
+  ];
+
+  /* ========================================================= */
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  };
+  var form = $('#f');
+  var dirty = false, sending = false;
+
+  /* ---------- Toast ---------- */
+  var toastTimer;
+  function toast(msg, bad) {
+    var t = $('#toast');
+    t.textContent = msg;
+    t.className = 'on' + (bad ? ' bad' : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.className = ''; }, bad ? 5000 : 2800);
+  }
+
+  /* ---------- QCM (chips) ---------- */
+  function opt(o) { return typeof o === 'string' ? { v: o } : o; }
+  function syncChips(el) {
+    $$('label.chip', el).forEach(function (l) { l.classList.toggle('on', l.querySelector('input').checked); });
+  }
+  $$('.chips').forEach(function (el) {
+    var name = el.dataset.name;
+    var multi = el.hasAttribute('data-multi');
+    var defs = (el.dataset.default || '').split('|');
+    OPTIONS[name].map(opt).forEach(function (o) {
+      var lab = document.createElement('label');
+      lab.className = 'chip';
+      lab.innerHTML =
+        '<input type="' + (multi ? 'checkbox' : 'radio') + '" name="' + name + '" value="' + esc(o.v) + '"' +
+        (defs.indexOf(o.v) >= 0 ? ' checked' : '') + '>' +
+        (o.c ? '<span class="sw" style="background:' + o.c + '" aria-hidden="true"></span>' : '') +
+        (o.i ? '<span class="ic" aria-hidden="true">' + o.i + '</span>' : '') +
+        '<span class="cl"><b>' + esc(o.l || o.v) + '</b>' + (o.s ? '<small>' + esc(o.s) + '</small>' : '') + '</span>';
+      el.appendChild(lab);
+    });
+    el.addEventListener('change', function (e) {
+      var t = e.target;
+      if (t.name !== name) return;
+      var ex = el.dataset.exclusive;
+      if (multi && ex) {
+        if (t.checked) {
+          $$('input', el).forEach(function (i) {
+            if (t.value === ex ? i !== t : i.value === ex) i.checked = false;
+          });
+        }
+        if (!$$('input:checked', el).length) {
+          var x = $$('input', el).filter(function (i) { return i.value === ex; })[0];
+          if (x) x.checked = true;
+        }
+      }
+      syncChips(el);
+      clearErr(el);
+      if (name === 'couleur') onCouleur();
+      updateSummary();
+    });
+    syncChips(el);
+  });
+
+  function val(name) { var i = $('input[name="' + name + '"]:checked'); return i ? i.value : ''; }
+  function vals(name) { return $$('input[name="' + name + '"]:checked').map(function (i) { return i.value; }); }
+  function labelOf(name, v) {
+    var o = OPTIONS[name].map(opt).filter(function (x) { return x.v === v; })[0];
+    if (!o) return v;
+    return o.l && o.s ? o.l + ' ' + o.s : v;
+  }
+
+  function onCouleur() {
+    var c = val('couleur');
+    $('#c-bico').hidden = c !== 'Bicolore';
+    $('#c-autre').hidden = c !== 'Autre code RAL';
+  }
+
+  /* ---------- Erreurs ---------- */
+  function fieldOf(el) { return el.closest('[data-field]'); }
+  function showErr(el, msg) {
+    var f = fieldOf(el);
+    if (!f) return;
+    f.classList.add('has-err');
+    var p = f.querySelector(':scope > .err') || f.querySelector('.err');
+    if (p) { p.textContent = msg; p.classList.add('on'); }
+    if (el.matches('input,select,textarea')) el.setAttribute('aria-invalid', 'true');
+  }
+  function clearErr(el) {
+    var f = fieldOf(el);
+    if (!f) return;
+    f.classList.remove('has-err');
+    $$('.err', f).forEach(function (p) { p.textContent = ''; p.classList.remove('on'); });
+    $$('[aria-invalid]', f).forEach(function (i) { i.removeAttribute('aria-invalid'); });
+  }
+  form.addEventListener('input', function (e) {
+    dirty = true;
+    if (e.target.matches('input,select,textarea')) clearErr(e.target);
+    updateSummary();
+  });
+
+  /* ---------- Ouvrages ---------- */
+  var list = $('#ouvrages');
+  function addRow() {
+    var row = document.createElement('div');
+    row.className = 'ouv';
+    row.setAttribute('data-field', '');
+    row.innerHTML =
+      '<div class="ouv-h"><b class="ouv-n">Ouvrage</b>' +
+      '<button type="button" class="x" aria-label="Supprimer cet ouvrage">✕</button></div>' +
+      '<div class="f"><label>Type d\'ouvrage</label><select name="o_type"><option value="">Choisir…</option>' +
+      OUVRAGES.map(function (o) { return '<option>' + esc(o) + '</option>'; }).join('') + '</select></div>' +
+      '<div class="f"><label>Précision <i>(facultatif)</i></label>' +
+      '<input type="text" name="o_prec" maxlength="120" placeholder="Ex : oscillo-battant 2 vantaux, cuisine"></div>' +
+      '<div class="g3">' +
+      '<div class="f"><label>Largeur (mm)</label><input type="number" name="o_l" inputmode="numeric" min="1" step="1" placeholder="1200"></div>' +
+      '<div class="f"><label>Hauteur (mm)</label><input type="number" name="o_h" inputmode="numeric" min="1" step="1" placeholder="1400"></div>' +
+      '<div class="f"><label>Qté</label><input type="number" name="o_q" inputmode="numeric" min="1" step="1" value="1"></div>' +
+      '</div><p class="warn" hidden></p><p class="err"></p>';
+    // Labels reliés aux champs (accessibilité)
+    $$('.f', row).forEach(function (f) {
+      var id = 'o' + Math.random().toString(36).slice(2, 9);
+      var c = f.querySelector('input,select');
+      c.id = id;
+      f.querySelector('label').setAttribute('for', id);
+    });
+    row.querySelector('.x').addEventListener('click', function () {
+      row.remove();
+      renumber();
+      updateSummary();
+    });
+    $$('input[name="o_l"],input[name="o_h"]', row).forEach(function (i) {
+      i.addEventListener('blur', function () { checkMm(row); });
+    });
+    list.appendChild(row);
+    renumber();
+    updateSummary();
+    return row;
+  }
+  function checkMm(row) {
+    var w = row.querySelector('.warn');
+    var msgs = [];
+    ['o_l', 'o_h'].forEach(function (n) {
+      var v = parseFloat(row.querySelector('[name="' + n + '"]').value);
+      var lab = n === 'o_l' ? 'Largeur' : 'Hauteur';
+      if (v > 0 && v < 250) msgs.push(lab + ' de ' + v + ' mm : saisie en cm ? Les cotes sont attendues en millimètres.');
+      else if (v > 6000) msgs.push(lab + ' de plus de 6 m : cote à vérifier.');
+    });
+    w.textContent = msgs.length ? '⚠️ ' + msgs.join(' ') : '';
+    w.hidden = !msgs.length;
+  }
+  function renumber() {
+    var rows = $$('.ouv', list);
+    rows.forEach(function (r, i) {
+      r.querySelector('.ouv-n').textContent = 'Ouvrage ' + (i + 1);
+      r.querySelector('.ouv-h .x').hidden = rows.length === 1;
+    });
+  }
+  function getOuvrages() {
+    return $$('.ouv', list).map(function (r) {
+      return {
+        type: r.querySelector('[name="o_type"]').value,
+        precision: r.querySelector('[name="o_prec"]').value.trim(),
+        largeur_mm: parseInt(r.querySelector('[name="o_l"]').value, 10) || 0,
+        hauteur_mm: parseInt(r.querySelector('[name="o_h"]').value, 10) || 0,
+        quantite: parseInt(r.querySelector('[name="o_q"]').value, 10) || 0
+      };
+    });
+  }
+  $('#add-ouv').addEventListener('click', function () {
+    var r = addRow();
+    r.querySelector('select').focus();
+  });
+
+  /* ---------- Mémo vocal ---------- */
+  var rec = null, chunks = [], audioBlob = null, audioExt = 'webm', t0 = 0, tick = null, audioUrl = null;
+  var recBtn = $('#rec');
+  var canRecord = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
+  if (!canRecord) {
+    recBtn.disabled = true;
+    $('#rec-hint').textContent = window.isSecureContext
+      ? "L'enregistrement vocal n'est pas pris en charge par ce navigateur."
+      : "L'enregistrement vocal nécessite une page servie en HTTPS.";
+  }
+  function pickMime() {
+    var c = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'];
+    for (var i = 0; i < c.length; i++) {
+      if (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(c[i])) return c[i];
+    }
+    return '';
+  }
+  function fmtSec(s) { s = Math.floor(s); return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); }
+  function setRecUI(on) {
+    recBtn.classList.toggle('on', on);
+    $('#rec-t').textContent = on ? "Arrêter l'enregistrement" : (audioBlob ? 'Réenregistrer le mémo' : 'Enregistrer un mémo vocal');
+  }
+  function startRec() {
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      var mime = pickMime();
+      rec = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream);
+      chunks = [];
+      rec.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+      rec.onstop = function () {
+        stream.getTracks().forEach(function (t) { t.stop(); });
+        clearInterval(tick);
+        var type = rec.mimeType || mime || 'audio/webm';
+        audioBlob = new Blob(chunks, { type: type });
+        audioExt = /mp4|aac|m4a/.test(type) ? 'm4a' : /ogg/.test(type) ? 'ogg' : 'webm';
+        if (audioUrl) URL.revokeObjectURL(audioUrl);
+        audioUrl = URL.createObjectURL(audioBlob);
+        $('#audio').src = audioUrl;
+        $('#audio-wrap').hidden = false;
+        rec = null;
+        dirty = true;
+        setRecUI(false);
+        updateSummary();
+      };
+      rec.start(1000);
+      t0 = Date.now();
+      $('#timer').textContent = '00:00';
+      tick = setInterval(function () {
+        var s = (Date.now() - t0) / 1000;
+        $('#timer').textContent = fmtSec(s);
+        if (s >= CONFIG.AUDIO_MAX_SEC) { stopRec(); toast('Durée maximale atteinte (5 min).'); }
+      }, 250);
+      setRecUI(true);
+    }).catch(function () {
+      toast("Micro refusé ou indisponible : autorisez le micro dans les réglages du navigateur.", true);
+    });
+  }
+  function stopRec() { if (rec && rec.state !== 'inactive') rec.stop(); }
+  recBtn.addEventListener('click', function () {
+    if (rec && rec.state === 'recording') stopRec();
+    else startRec();
+  });
+  function clearAudio() {
+    audioBlob = null;
+    if (audioUrl) URL.revokeObjectURL(audioUrl);
+    audioUrl = null;
+    $('#audio').removeAttribute('src');
+    $('#audio-wrap').hidden = true;
+    $('#timer').textContent = '00:00';
+    setRecUI(false);
+    updateSummary();
+  }
+  $('#audio-del').addEventListener('click', clearAudio);
+
+  /* ---------- Photos ---------- */
+  var photos = []; // { blob, url }
+  function compress(file) {
+    return new Promise(function (resolve) {
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var w = img.naturalWidth, h = img.naturalHeight;
+          var r = Math.min(1, CONFIG.PHOTO_MAX_PX / Math.max(w, h));
+          if (r === 1 && file.type === 'image/jpeg' && file.size < 1500000) { URL.revokeObjectURL(url); return resolve(file); }
+          var c = document.createElement('canvas');
+          c.width = Math.round(w * r); c.height = Math.round(h * r);
+          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+          c.toBlob(function (b) { URL.revokeObjectURL(url); resolve(b || file); }, 'image/jpeg', CONFIG.PHOTO_QUALITY);
+        } catch (e) { URL.revokeObjectURL(url); resolve(file); }
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); resolve(file); };
+      img.src = url;
+    });
+  }
+  function addFiles(files) {
+    var arr = Array.prototype.slice.call(files || []).filter(function (f) { return /^image\//.test(f.type) || !f.type; });
+    var room = CONFIG.MAX_PHOTOS - photos.length;
+    if (arr.length > room) toast(CONFIG.MAX_PHOTOS + ' photos maximum : seules les premières sont gardées.');
+    arr = arr.slice(0, Math.max(0, room));
+    return arr.reduce(function (p, f) {
+      return p.then(function () {
+        return compress(f).then(function (b) { photos.push({ blob: b, url: URL.createObjectURL(b) }); });
+      });
+    }, Promise.resolve()).then(function () { dirty = true; renderPhotos(); });
+  }
+  function renderPhotos() {
+    var g = $('#ph-grid');
+    g.innerHTML = '';
+    for (var i = 0; i < CONFIG.MAX_PHOTOS; i++) {
+      var p = photos[i];
+      var d = document.createElement('div');
+      if (p) {
+        d.className = 'ph';
+        d.innerHTML = '<img alt="Photo ' + (i + 1) + '" src="' + p.url + '"><button type="button" class="x" aria-label="Supprimer la photo ' + (i + 1) + '">✕</button>';
+        (function (idx) {
+          d.querySelector('.x').addEventListener('click', function () {
+            URL.revokeObjectURL(photos[idx].url);
+            photos.splice(idx, 1);
+            renderPhotos();
+          });
+        })(i);
+      } else {
+        d.className = 'ph empty';
+        d.textContent = 'Photo ' + (i + 1);
+      }
+      g.appendChild(d);
+    }
+    var full = photos.length >= CONFIG.MAX_PHOTOS;
+    $('#ph-cam').disabled = full;
+    $('#ph-lib').disabled = full;
+    $('#ph-count').textContent = photos.length + ' / ' + CONFIG.MAX_PHOTOS;
+    updateSummary();
+  }
+  $('#ph-cam').addEventListener('click', function () { $('#in-cam').click(); });
+  $('#ph-lib').addEventListener('click', function () { $('#in-lib').click(); });
+  ['#in-cam', '#in-lib'].forEach(function (s) {
+    $(s).addEventListener('change', function (e) {
+      addFiles(e.target.files).then(function () { e.target.value = ''; });
+    });
+  });
+
+  /* ---------- Résumé ---------- */
+  function updateSummary() {
+    var o = getOuvrages();
+    var pieces = o.reduce(function (s, x) { return s + (x.quantite || 0); }, 0);
+    var parts = [
+      o.length + ' ouvrage' + (o.length > 1 ? 's' : '') + (pieces ? ' (' + pieces + ' pièce' + (pieces > 1 ? 's' : '') + ')' : ''),
+      photos.length + ' photo' + (photos.length > 1 ? 's' : '')
+    ];
+    if (audioBlob) parts.push('mémo vocal');
+    $('#sum').textContent = parts.join(' · ');
+  }
+
+  /* ---------- Horodatage Europe/Paris ---------- */
+  function horodatage() {
+    var d = new Date();
+    var p = {};
+    new Intl.DateTimeFormat('fr-FR', {
+      timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'
+    }).formatToParts(d).forEach(function (x) { p[x.type] = x.value; });
+    if (p.hour === '24') p.hour = '00';
+    var asUtc = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second);
+    var off = Math.round((asUtc - Math.floor(d.getTime() / 1000) * 1000) / 60000);
+    var a = Math.abs(off);
+    var offStr = (off >= 0 ? '+' : '-') + String(Math.floor(a / 60)).padStart(2, '0') + ':' + String(a % 60).padStart(2, '0');
+    return {
+      iso: d.toISOString(),
+      paris: p.day + '/' + p.month + '/' + p.year + ' ' + p.hour + ':' + p.minute + ':' + p.second,
+      parisIso: p.year + '-' + p.month + '-' + p.day + 'T' + p.hour + ':' + p.minute + ':' + p.second + offStr,
+      dossier: 'DEV-' + p.year + '-' + p.month + p.day + '-' + p.hour + p.minute + p.second
+    };
+  }
+
+  /* ---------- Validation ---------- */
+  function validate() {
+    var first = null;
+    function bad(el, msg) { showErr(el, msg); if (!first) first = el; }
+    $$('[data-field]').forEach(function (f) { if (!f.hidden) clearErr(f.firstElementChild || f); });
+
+    [['#nom', 'Nom requis'], ['#prenom', 'Prénom requis'], ['#adresse', 'Adresse du chantier requise']].forEach(function (x) {
+      var i = $(x[0]);
+      if (!i.value.trim()) bad(i, x[1]);
+    });
+    var adr = $('#adresse').value.trim();
+    if (adr && !/\b\d{5}\b/.test(adr)) bad($('#adresse'), 'Ajoutez le code postal (5 chiffres) pour le calcul du trajet.');
+    var tel = $('#telephone');
+    if (!tel.value.trim()) bad(tel, 'Téléphone requis');
+    else if (tel.value.replace(/\D/g, '').length < 10) bad(tel, 'Numéro incomplet (10 chiffres attendus)');
+    var em = $('#email');
+    if (!em.value.trim()) bad(em, 'Email requis');
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim())) bad(em, 'Adresse email invalide');
+
+    $$('.chips[data-required]').forEach(function (el) {
+      if (!$$('input:checked', el).length) bad(el, 'Choix requis');
+    });
+
+    var c = val('couleur');
+    if (c === 'Bicolore' && !$('#couleur_ext').value.trim()) bad($('#couleur_ext'), 'Précisez la couleur extérieure');
+    if (c === 'Autre code RAL') {
+      var cc = $('#couleur_code').value.trim();
+      if (!cc) bad($('#couleur_code'), 'Précisez le code couleur');
+      else if (/^ral/i.test(cc) && !/\b\d{4}\b/.test(cc)) bad($('#couleur_code'), 'Un code RAL comporte 4 chiffres (ex : RAL 7035)');
+    }
+    var ce = $('#couleur_ext').value.trim();
+    if (c === 'Bicolore' && ce && /^ral/i.test(ce) && !/\b\d{4}\b/.test(ce)) bad($('#couleur_ext'), 'Un code RAL comporte 4 chiffres (ex : RAL 7016)');
+
+    $$('.ouv', list).forEach(function (r, i) {
+      var o = getOuvrages()[i];
+      var m = [];
+      if (!o.type) m.push("type d'ouvrage");
+      if (!(o.largeur_mm > 0)) m.push('largeur');
+      if (!(o.hauteur_mm > 0)) m.push('hauteur');
+      if (!(o.quantite >= 1)) m.push('quantité');
+      if (m.length) {
+        var target = !o.type ? r.querySelector('[name="o_type"]') : !(o.largeur_mm > 0) ? r.querySelector('[name="o_l"]') : !(o.hauteur_mm > 0) ? r.querySelector('[name="o_h"]') : r.querySelector('[name="o_q"]');
+        bad(target, 'À compléter : ' + m.join(', '));
+        r.querySelector(':scope > .err').classList.add('on');
+      }
+    });
+
+    var h = $('#heures_mo');
+    if (h.value !== '') {
+      var hv = parseFloat(String(h.value).replace(',', '.'));
+      if (isNaN(hv) || hv < 0 || hv > 500) bad(h, 'Entre 0 et 500 heures');
+    }
+    return first;
+  }
+
+  /* ---------- Construction de l'envoi ---------- */
+  function buildFormData(ts) {
+    var fd = new FormData();
+    var nom = $('#nom').value.trim();
+    var prenom = $('#prenom').value.trim();
+    var nomComplet = (prenom + ' ' + nom).trim();
+    var ouvrages = getOuvrages();
+    var dims = ouvrages.map(function (o) {
+      return o.quantite + 'x ' + o.type + (o.precision ? ' (' + o.precision + ')' : '') + ' ' + o.largeur_mm + ' × ' + o.hauteur_mm + ' mm';
+    }).join('\n');
+    var c = val('couleur');
+    var couleurTxt = c === 'Bicolore'
+      ? 'Bicolore : intérieur blanc / extérieur ' + $('#couleur_ext').value.trim().toUpperCase()
+      : c === 'Autre code RAL' ? 'Autre : ' + $('#couleur_code').value.trim() : labelOf('couleur', c);
+    var finition = vals('finition');
+    var manut = vals('manutention');
+    var heures = $('#heures_mo').value === '' ? '' : String(parseFloat(String($('#heures_mo').value).replace(',', '.')));
+    var notes = $('#notes').value.trim();
+    var sansAsc = $('#sans_ascenseur').checked;
+    var etage = val('etage');
+
+    // Synthèse QCM ajoutée aux notes : le workflow actuel la transmet à l'IA telle quelle
+    var synthese = [
+      'Fournisseur souhaité : ' + val('fournisseur'),
+      'Type d\'intervention : ' + val('type_intervention'),
+      'Vitrage : ' + val('vitrage'),
+      'Finition / quincaillerie : ' + finition.join(', '),
+      'Poseurs prévus : ' + val('nb_poseurs'),
+      'Main-d\'œuvre estimée par le commercial : ' + (heures ? heures + ' h' : 'non renseignée'),
+      'Manutention / accès : ' + manut.join(', ')
+    ].join('\n');
+
+    var flat = {
+      dossier_id: ts.dossier,
+      source: CONFIG.SOURCE,
+      timestamp_iso: ts.iso,
+      heure_locale_paris: ts.paris,
+      date_heure_paris_iso: ts.parisIso,
+      fuseau: 'Europe/Paris',
+      nom: nom, prenom: prenom, nom_complet: nomComplet,
+      telephone: $('#telephone').value.trim(),
+      email: $('#email').value.trim().toLowerCase(),
+      adresse_chantier: $('#adresse').value.trim(),
+      type_batiment: val('type_batiment'),
+      etage: etage,
+      sans_ascenseur: sansAsc ? 'true' : 'false',
+      logement_plus_2_ans: val('logement') === 'oui' ? 'true' : 'false',
+      fournisseur: val('fournisseur'),
+      type_intervention: val('type_intervention'),
+      ouvrages_json: JSON.stringify(ouvrages),
+      dimensions_relevees: dims,
+      couleur: c,
+      couleur_libelle: couleurTxt,
+      couleur_code: c === 'Autre code RAL' ? $('#couleur_code').value.trim() : (c === 'Bicolore' ? $('#couleur_ext').value.trim().toUpperCase() : c),
+      vitrage: val('vitrage'),
+      finition: finition.join(' | '),
+      nb_poseurs: val('nb_poseurs'),
+      heures_mo: heures,
+      manutention: manut.join(' | '),
+      grue: manut.some(function (m) { return /grue/i.test(m); }) ? 'true' : 'false',
+      notes: notes,
+      nb_photos: String(photos.length),
+      memo_vocal_present: audioBlob ? 'true' : 'false'
+    };
+
+    // Structure compatible avec le nœud « Préparer le dossier » du workflow actuel
+    var payload = {
+      ID_Dossier: ts.dossier,
+      Timestamp_ISO: ts.iso,
+      Heure_Locale_Paris: ts.paris,
+      Client: { Nom: nom, Prenom: prenom, Nom_Complet: nomComplet, Telephone: flat.telephone, Email: flat.email },
+      Chantier: { Adresse: flat.adresse_chantier, Type_Batiment: flat.type_batiment, Etage: etage, Sans_Ascenseur: sansAsc, Logement_Plus_2_Ans: val('logement') === 'oui' },
+      Menuiserie: {
+        Fournisseur_Prefere: flat.fournisseur,
+        Type_Pose: flat.type_intervention,
+        Ouvrages: ouvrages,
+        Dimensions_Relevees: dims,
+        Code_Couleur_RAL: couleurTxt,
+        Vitrage: flat.vitrage,
+        Finition_Quincaillerie: finition,
+        Notes_Complementaires: (notes ? notes + '\n\n' : '') + synthese
+      },
+      Logistique: { Nb_Poseurs: Number(flat.nb_poseurs), Heures_MO_Estimees: heures === '' ? null : Number(heures), Manutention: manut },
+      Pieces_Jointes: { Nombre_Photos: photos.length, Note_Vocale_Presente: !!audioBlob }
+    };
+
+    Object.keys(flat).forEach(function (k) { fd.append(k, flat[k]); });
+    fd.append('payload_json', JSON.stringify(payload));
+    if (audioBlob) fd.append('audio_memo', audioBlob, 'audio_memo.' + audioExt);
+    photos.forEach(function (p, i) {
+      var ext = /png/.test(p.blob.type) ? 'png' : /heic|heif/.test(p.blob.type) ? 'heic' : /webp/.test(p.blob.type) ? 'webp' : 'jpg';
+      fd.append('photo_' + (i + 1), p.blob, 'photo_' + (i + 1) + '.' + ext);
+    });
+    return fd;
+  }
+
+  /* ---------- Envoi ---------- */
+  function setSending(on, label) {
+    sending = on;
+    var b = $('#send');
+    b.disabled = on;
+    b.innerHTML = on ? '<span class="spin" aria-hidden="true"></span><span>' + esc(label) + '</span>' : '<span>Envoyer le relevé</span>';
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (sending) return;
+    if (rec && rec.state === 'recording') { toast("Arrêtez d'abord l'enregistrement vocal."); return; }
+    var first = validate();
+    if (first) {
+      var target = first.closest('[data-field]') || first;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (first.focus && first.matches('input,select,textarea')) setTimeout(function () { first.focus({ preventScroll: true }); }, 350);
+      toast('Quelques champs sont à compléter.', true);
+      return;
+    }
+    if (!navigator.onLine) { toast('Pas de connexion : rien n\'est perdu, réessayez dès que le réseau revient.', true); return; }
+
+    var ts = horodatage();
+    var fd = buildFormData(ts);
+    var nFiles = photos.length + (audioBlob ? 1 : 0);
+    setSending(true, nFiles ? 'Envoi du dossier et de ' + nFiles + ' fichier' + (nFiles > 1 ? 's' : '') + '…' : 'Envoi du dossier…');
+
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var to = setTimeout(function () { if (ctrl) ctrl.abort(); }, CONFIG.TIMEOUT_MS);
+
+    fetch(CONFIG.WEBHOOK_URL, { method: 'POST', body: fd, signal: ctrl ? ctrl.signal : undefined })
+      .then(function (res) {
+        return res.text().then(function (txt) {
+          var data = {};
+          try { data = JSON.parse(txt); } catch (err) { data = {}; }
+          if (!res.ok) {
+            var m = res.status === 404
+              ? 'Webhook introuvable (404) : le workflow n8n est-il publié ?'
+              : 'Erreur du serveur (' + res.status + ')';
+            throw new Error(m);
+          }
+          return data;
+        });
+      })
+      .then(function (data) {
+        clearTimeout(to);
+        dirty = false;
+        setSending(false);
+        $('#done-id').textContent = 'N° ' + (data.dossier_id || ts.dossier);
+        $('#done-msg').textContent = data.message || 'La fiche Prodevis arrive par email pour validation.';
+        $('#done-time').textContent = 'Envoyé le ' + ts.paris.replace(' ', ' à ');
+        $('#done').hidden = false;
+        $('#again').focus();
+      })
+      .catch(function (err) {
+        clearTimeout(to);
+        setSending(false);
+        var msg = err && err.name === 'AbortError'
+          ? "L'envoi a pris trop de temps. Vos données sont conservées : réessayez."
+          : (err && err.message && !/Failed to fetch|NetworkError|Load failed/i.test(err.message)
+            ? err.message + ' — vos données sont conservées.'
+            : "Envoi impossible (réseau ou accès refusé). Vos données sont conservées : réessayez.");
+        toast(msg, true);
+      });
+  });
+
+  /* ---------- Réinitialisation ---------- */
+  function resetAll() {
+    form.reset();
+    $$('.chips').forEach(syncChips);
+    onCouleur();
+    list.innerHTML = '';
+    addRow();
+    photos.forEach(function (p) { URL.revokeObjectURL(p.url); });
+    photos = [];
+    renderPhotos();
+    clearAudio();
+    $$('[data-field]').forEach(function (f) { clearErr(f.firstElementChild || f); });
+    dirty = false;
+    $('#done').hidden = true;
+    window.scrollTo(0, 0);
+  }
+  $('#again').addEventListener('click', resetAll);
+
+  window.addEventListener('beforeunload', function (e) {
+    if (dirty && !sending) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  /* ---------- Init ---------- */
+  addRow();
+  renderPhotos();
+  onCouleur();
+  updateSummary();
+})();
+</script>
+</body>
+</html>
