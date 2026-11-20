@@ -2,7 +2,7 @@
 
 ## Installer l'agent (jury, testeurs)
 
-**[⬇ Télécharger le kit d'installation](https://ineslmdi-dotcom.github.io/ateliers-michel/kit-jury-ateliers-michel-v2.zip)**
+**[⬇ Télécharger le kit d'installation](https://ineslmdi-dotcom.github.io/ateliers-michel/kit-jury-ateliers-michel-v3.zip)**
 
 1. Dézippez le fichier téléchargé.
 2. Ouvrez **`1-INSTALLER.html`** dans votre navigateur (double-clic) et suivez la page : aucune commande, aucun code.
